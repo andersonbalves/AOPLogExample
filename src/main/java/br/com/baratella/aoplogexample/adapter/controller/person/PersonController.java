@@ -38,7 +38,7 @@ public class PersonController {
   }
 
   @RequestMapping(value = "/person", method = RequestMethod.GET)
-  public ResponseEntity<PersonResponse> savePerson(@RequestParam("cpf") String cpf) {
+  public ResponseEntity<PersonResponse> findPersonByCPF(@RequestParam("cpf") String cpf) {
     FindPersonRequest request = FindPersonRequest.builder()
         .cpf(cpf)
         .build();
