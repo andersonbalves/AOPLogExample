@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class PersonRequest {
+
   private String name;
   private String lastName;
   private String cpf;

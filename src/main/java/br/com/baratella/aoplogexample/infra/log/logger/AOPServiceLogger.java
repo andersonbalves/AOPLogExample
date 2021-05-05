@@ -24,18 +24,16 @@ public class AOPServiceLogger {
 
   @Before("servicePointcut()")
   public void logBefore(JoinPoint joinPoint) throws Throwable {
-    LoggerDTO dto = LoggerDTO.builder()
-        .className(joinPoint.getClass().getName())
-        .method(joinPoint.getSignature().getName())
-        .params(buildParamsMap(joinPoint))
-        .build();
+    LoggerDTO dto = new LoggerDTO(joinPoint);
 
     log.info("-> Método " + dto.getMethod() + " iniciado com as seguintes informações:\n"
         + new ObjectMessage(dto).getFormattedMessage());
   }
+
   @AfterReturning(pointcut = "servicePointcut()", returning = "retVal")
   public void logAfter(JoinPoint joinPoint, Object retVal) {
-    log.info("<- O método " + joinPoint.getSignature().getName() + " foi executado e retornou:\n"
+    LoggerDTO dto = new LoggerDTO(joinPoint);
+    log.info("<- O método " + dto.getMethod() + " foi executado e retornou:\n"
         + new ObjectMessage(retVal).getFormattedMessage());
   }
 

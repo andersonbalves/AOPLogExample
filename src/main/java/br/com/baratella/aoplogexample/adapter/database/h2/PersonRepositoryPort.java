@@ -6,6 +6,7 @@ import br.com.baratella.aoplogexample.core.usecase.findperson.entity.FindPersonR
 import br.com.baratella.aoplogexample.core.usecase.findperson.entity.FindPersonResponse;
 import br.com.baratella.aoplogexample.infra.database.entity.PersonEntity;
 import br.com.baratella.aoplogexample.infra.database.repository.PersonRepository;
+import br.com.baratella.aoplogexample.infra.log.annotation.LogMethod;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -15,6 +16,8 @@ public class PersonRepositoryPort implements IPersonRepository {
 
   private final PersonRepository personRepository;
 
+  @Override
+  @LogMethod
   public void savePerson(CreatePersonRequest request) {
     PersonEntity person = PersonEntity.builder()
         .name(request.getName())
@@ -25,6 +28,7 @@ public class PersonRepositoryPort implements IPersonRepository {
   }
 
   @Override
+  @LogMethod
   public FindPersonResponse findPerson(FindPersonRequest request) {
     PersonEntity person = personRepository.findByCpf(request.getCpf());
     return FindPersonResponse.builder()

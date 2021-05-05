@@ -13,7 +13,6 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 public class AopLogExampleApplication {
 
   public static void main(String[] args) {
-    log.info("A aplicação foi iniciada: ");
     SpringApplication.run(AopLogExampleApplication.class, args);
   }
 
